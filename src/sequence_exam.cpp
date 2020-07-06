@@ -694,7 +694,7 @@ int test5( )
 
     cout << "Checking correctness of a self-assignment x = x;" << endl;
     original.insert(2);
-    original = original;
+    original = original; // @suppress("Assignment to itself")
     if (!correct
         (original, 2*TESTSIZE-1, 1, items)
         )

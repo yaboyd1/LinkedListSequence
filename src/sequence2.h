@@ -64,38 +64,35 @@
 
 #ifndef ASSIGNMENT_SEQUENCE2_H
 #define ASSIGNMENT_SEQUENCE2_H
-#include <cstdlib> // Provides size_t and NULL
-#include "node2.h"   // Provides linked list toolkit
+#include <cstdlib> // Provides NULL and size_t
+#include "node2.h" // Provides linked list toolkit
 
-namespace assignment_sequence2
-{
-
-    class sequence
-    {
+namespace assignment_sequence2 {
+    class sequence {
     public:
         // TYPEDEF
-        typedef size_t size_type; //typedef std::size_t size_type;
+        typedef size_t size_type;
         typedef node::value_type value_type;
         // CONSTRUCTORS and DESTRUCTOR
-        sequence( );
+        sequence();
         sequence(const sequence& source);
-        ~sequence( );
+        ~sequence();
         // MODIFICATION MEMBER FUNCTIONS
-        void start( );
-        void advance( );
+        void start();
+        void advance();
         void insert(const value_type& entry);
         void attach(const value_type& entry);
-        void remove_current( );
+        void remove_current();
         void operator =(const sequence& source);
         // CONSTANT MEMBER FUNCTIONS
-        size_t size( ) const;
-        bool is_item( ) const;
-        value_type current( ) const;
+        size_t size() const {return many_nodes;}
+        bool is_item() const {return current_ptr != NULL;}
+        value_type current() const {return current_ptr->data();}
     private:
-        -- Declare your private members here.
-        node *current_ptr;    //
-        node *head_ptr;       // List head pointer
-        size_type many_nodes; // Number of nodes on the list
+        node *head_ptr;       // Points to the start of the sequence
+        node *tail_ptr;       // Points to the end of the sequence
+        node *current_ptr;    // Points to the current item in the sequence
+        size_type many_nodes; // Number of nodes in the list
     };
 }
 
