@@ -123,7 +123,7 @@
 
 #ifndef ASSIGNMENT_NODE1_H
 #define ASSIGNMENT_NODE1_H
-#include <cstdlib> // Provides size_t and NULL
+#include <cstdlib> // Provides NULL and size_t 
 
 namespace assignment_sequence2 {
     class node {
