@@ -8,14 +8,25 @@ using namespace assignment_sequence2;
 
 namespace assignment_sequence2 {
 	// CONSTRUCTORS and DESTRUCTOR
-	sequence::sequence();
-	sequence::sequence(const sequence& source);
-	sequence::~sequence();
+	sequence::sequence() {
+		head_ptr = NULL;
+		tail_ptr = NULL;
+		current_ptr = NULL;
+		many_nodes = 0;
+	}
+	sequence::sequence(const sequence& source) {
+		list_copy(source.head, source.tail, head);
+	}
+	sequence::~sequence() {
+		delete head_ptr;
+	}
     // MODIFICATION MEMBER FUNCTIONS
 	void sequence::start();
 	void sequence::advance();
 	void sequence::insert(const value_type& entry);
 	void sequence::attach(const value_type& entry);
 	void sequence::remove_current();
-	void sequence::operator =(const sequence& source);
+	void sequence::operator =(const sequence& source) {
+		list_copy(source.head, source.tail, head);
+	}
 }
