@@ -64,6 +64,7 @@
 
 #ifndef ASSIGNMENT_SEQUENCE2_H
 #define ASSIGNMENT_SEQUENCE2_H
+#include <cassert> // Provides assert()
 #include <cstdlib> // Provides NULL and size_t
 #include "node2.h" // Provides linked list toolkit
 
@@ -89,10 +90,10 @@ namespace assignment_sequence2 {
         bool is_item() const {return current_ptr != NULL;}
         value_type current() const {return current_ptr->data();}
     private:
-        node *head_ptr;       // Points to the start of the sequence
-        node *tail_ptr;       // Points to the end of the sequence
-        node *current_ptr;    // Points to the current item in the sequence
-        size_type many_nodes; // Number of nodes in the list
+        node *head_ptr;
+        node *tail_ptr;
+        node *current_ptr;
+        size_type many_nodes;
     };
 }
 
