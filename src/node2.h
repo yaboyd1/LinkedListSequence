@@ -141,10 +141,10 @@ namespace assignment_sequence2 {
         void set_link(node* new_link) {link_field = new_link;}
 
     	// Constant member function to retrieve the current data:
-    	value_type data() const {return data_field;}
+        value_type data() const {return data_field;}
 
     	// Two slightly different member functions to retreive the current link:
-    	const node* link() const {return link_field;}
+        const node* link() const {return link_field;}
         node* link() {return link_field;}
 
     private:

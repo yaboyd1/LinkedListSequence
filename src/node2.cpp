@@ -12,34 +12,34 @@ using namespace std;
 
 namespace assignment_sequence2
 {
-    size_t list_length(const node* head_ptr)
+	size_t list_length(const node* head_ptr)
     // Library facilities used: cstdlib
-    {
+	{
 		size_t answer = 0;
 		for (const node* cursor = head_ptr; cursor != NULL; cursor = cursor->link())
-		    ++answer;
+			++answer;
 		return answer;
-    }
+	}
 
-    void list_head_insert(node*& head_ptr, const node::value_type& entry)
-    {
+	void list_head_insert(node*& head_ptr, const node::value_type& entry)
+	{
 		head_ptr = new node(entry, head_ptr);
-    }
+	}
 
-    void list_insert(node* previous_ptr, const node::value_type& entry)
-    {
+	void list_insert(node* previous_ptr, const node::value_type& entry)
+	{
 		node *insert_ptr = new node(entry, previous_ptr->link());
 		previous_ptr->set_link(insert_ptr);
-    }
+	}
 
-    node* list_search(node* head_ptr, const node::value_type& target)
+	node* list_search(node* head_ptr, const node::value_type& target)
     // Library facilities used: cstdlib
-    {
+	{
 		for (node* cursor = head_ptr; cursor != NULL; cursor = cursor->link())
-		    if (target == cursor->data())
+			if (target == cursor->data())
 				return cursor;
 		return NULL;
-    }
+	}
 
     const node* list_search(const node* head_ptr, const node::value_type& target)
     // Library facilities used: cstdlib
@@ -65,8 +65,8 @@ namespace assignment_sequence2
     {
 		assert (0 < position);
 		const node* cursor = head_ptr;
-		for (size_t i = 1; (i < position) && (cursor != NULL); i++)
-		    cursor = cursor->link( );
+		for (size_t i = 1; (i < position) && (cursor != NULL); i++) 
+			cursor = cursor->link();
 		return cursor;
     }
 

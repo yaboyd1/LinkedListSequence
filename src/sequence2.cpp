@@ -10,9 +10,9 @@ namespace assignment_sequence2 {
 	// CONSTRUCTORS and DESTRUCTOR
 	sequence::sequence() {
 		head_ptr = NULL;
-        tail_ptr = NULL;
-        current_ptr = NULL;
-        many_nodes = 0;
+		tail_ptr = NULL;
+		current_ptr = NULL;
+		many_nodes = 0;
 	}
 	sequence::sequence(const sequence& source) {
 		list_copy(source.head_ptr, head_ptr, tail_ptr);
@@ -30,9 +30,23 @@ namespace assignment_sequence2 {
 		current_ptr = current_ptr -> link();
 	}
 
-	void sequence::insert(const value_type& entry);
-	void sequence::attach(const value_type& entry);
-	void sequence::remove_current();
+	void sequence::insert(const value_type& entry) {
+		assert(is_item());
+		++many_nodes;
+	}
+	void sequence::attach(const value_type& entry) {
+		assert(is_item());
+		++many_nodes;
+	}
+	void sequence::remove_current() {
+		assert(is_item());
+		if (current_ptr == head_ptr) {
+			list_head_remove(head_ptr);
+		} else {
+			list_remove(current_ptr);
+		}
+		--many_nodes;
+	}
 	
 	void sequence::operator =(const sequence& source) {
 		list_copy(source.head_ptr, head_ptr, tail_ptr);
