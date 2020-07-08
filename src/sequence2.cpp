@@ -31,11 +31,27 @@ namespace assignment_sequence2 {
 	}
 
 	void sequence::insert(const value_type& entry) {
-		assert(is_item());
+		if (many_nodes == 0) {
+			list_head_insert(head_ptr);
+		} 
+		else if (is_item() == false) {
+			list_insert(tail_ptr);
+		} 
+		else {
+			list_insert(cursor);
+		}
 		++many_nodes;
 	}
 	void sequence::attach(const value_type& entry) {
-		assert(is_item());
+		if (many_nodes == 0) {
+			list_head_insert(head_ptr);
+		} 
+		else if (is_item() == false) {
+			list_head_insert(head_ptr);
+		}
+		else {
+			list_insert(cursor);
+		}
 		++many_nodes;
 	}
 	void sequence::remove_current() {
@@ -51,5 +67,6 @@ namespace assignment_sequence2 {
 	void sequence::operator =(const sequence& source) {
 		list_copy(source.head_ptr, head_ptr, tail_ptr);
 		many_nodes = source.many_nodes;
+		current_ptr = source.current_ptr;
 	}
 }
