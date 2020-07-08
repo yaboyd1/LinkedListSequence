@@ -39,7 +39,7 @@ namespace assignment_sequence2 {
 	}
 
 	void sequence::insert(const value_type& entry) {
-		if (many_nodes == 0) {
+		if (many_nodes == 0 || cursor == head) {
 			precursor = head;
 			list_head_insert(head, entry);
 			cursor = head;
