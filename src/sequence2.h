@@ -87,12 +87,13 @@ namespace assignment_sequence2 {
         void operator =(const sequence& source);
         // CONSTANT MEMBER FUNCTIONS
         size_t size() const {return many_nodes;}
-        bool is_item() const {return current_ptr != NULL;}
-        value_type current() const {return current_ptr->data();}
+        bool is_item() const {return cursor != NULL;}
+        value_type current() const {return currsor->data();}
     private:
-        node *head_ptr;
-        node *tail_ptr;
-        node *current_ptr;
+        node *head;
+        node *tail;
+        node *cursor;
+        node *precursor;
         size_type many_nodes;
     };
 }

@@ -9,59 +9,69 @@ using namespace assignment_sequence2;
 namespace assignment_sequence2 {
 	// CONSTRUCTORS and DESTRUCTOR
 	sequence::sequence() {
-		head_ptr = NULL;
-		tail_ptr = NULL;
-		current_ptr = NULL;
+		head = NULL;
+		tail = NULL;
+		cursor = NULL;
+		precursor = NULL;
 		many_nodes = 0;
 	}
 
 	sequence::sequence(const sequence& source) {
-		list_copy(source.head_ptr, head_ptr, tail_ptr);
+		list_copy(source.head, head, tail);
 		many_nodes = source.many_nodes;
-		current_ptr = source.current_ptr;
+		cursor = source.cursor;
+		precursor = source.precursor;
 	}
 
 	sequence::~sequence() {
-		list_clear(head_ptr);
+		list_clear(head);
 	}
 
 	// MODIFICARION MEMBER FUNCTIONS
 	void sequence::start() {
-		current_ptr = head_ptr;
+		precursor = NULL;
+		cursor = head;
 	}
 
 	void sequence::advance() {
-		current_ptr = current_ptr -> link();
+		precursor = cursor;
+		cursor = cursor->link();
 	}
 
 	void sequence::insert(const value_type& entry) {
 		if (many_nodes == 0) {
-			list_head_insert(head_ptr);
-			current_ptr = NULL;
+			precursor = head;
+			list_head_insert(head);
+			cursor = head;
 		} 
 		else if (is_item() == false) {
-			list_insert(tail_ptr);
-			current_ptr = head_ptr;
-		} 
+			list_head_insert(head);
+			precursor = NULL;
+			cursor = head;
+		}
 		else {
-			list_insert(current_ptr);
-			current_ptr = current_ptr -> link();
+			list_insert(precursor);
+			precursor = precursor->link();
+			cursor = cursor->link();
 		}
 		++many_nodes;
 	}
 
 	void sequence::attach(const value_type& entry) {
 		if (many_nodes == 0) {
-			list_head_insert(head_ptr);
-			current_ptr = head_ptr;
+			precursor = head;
+			list_head_insert(head);
+			cursor = head;
 		} 
 		else if (is_item() == false) {
-			list_head_insert(head_ptr);
-			current_ptr = tail_ptr;
-		}
+			precursor = tail;
+			list_insert(tail);
+			cursor = tail;
+		} 
 		else {
-			list_insert(current_ptr);
-			current_ptr = current_ptr -> link();
+			precursor = precursor->link();
+			list_insert(cursor);
+			cursor = cursor->link();
 		}
 		++many_nodes;
 	}
@@ -69,26 +79,31 @@ namespace assignment_sequence2 {
 	void sequence::remove_current() {
 		assert(is_item());
 		if (many_nodes == 1) {
-			list_head_remove(head_ptr);
-			current_ptr = NULL;
+			list_head_remove(head);
+			precursor = NULL;
+			cursor = NULL;
 		}
-		else if (current_ptr == head_ptr) {
-			list_head_remove(head_ptr);
-			current_ptr = head_ptr;
-		} else if (current_ptr == tail_ptr) {
-			list_remove(tail_ptr);
-			current_ptr = tail_ptr;
+		else if (cursor == head) {
+			precursor = NULL;
+			list_head_remove(head);
+			cursor = head;
+		} 
+		else if (cursor == tail) {
+			tail = precursor;
+			list_remove(tail);
+			cursor = NULL;
 		}
 		else {
-			list_remove(current_ptr);
-			current_ptr = current_ptr -> link();
+			list_remove(cursor);
+			cursor = cursor->link();
 		}
 		--many_nodes;
 	}
 	
 	void sequence::operator =(const sequence& source) {
-		list_copy(source.head_ptr, head_ptr, tail_ptr);
+		list_copy(source.head, head, tail);
 		many_nodes = source.many_nodes;
-		current_ptr = source.current_ptr;
+		cursor = source.cursor;
+		precursor = source.cursor;
 	}
 }
