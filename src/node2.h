@@ -128,8 +128,8 @@
 namespace assignment_sequence2 {
     class node {
     public:
-    	// TYPEDEF
-    	typedef double value_type;
+        // TYPEDEF
+        typedef double value_type;
 
     	// CONSTRUCTOR
     	node(const value_type& init_data = value_type(), node* init_link = NULL) { 

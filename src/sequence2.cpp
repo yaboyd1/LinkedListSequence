@@ -22,7 +22,7 @@ namespace assignment_sequence2 {
 	sequence::~sequence() {
 		list_clear(head_ptr);
 	}
-    // MODIFICATION MEMBER FUNCTIONS
+	// MODIFICARION MEMBER FUNCTIONS
 	void sequence::start() {
 		current_ptr = head_ptr;
 	}
