@@ -41,16 +41,16 @@ namespace assignment_sequence2 {
 	void sequence::insert(const value_type& entry) {
 		if (many_nodes == 0) {
 			precursor = head;
-			list_head_insert(head);
+			list_head_insert(head, entry);
 			cursor = head;
 		} 
 		else if (is_item() == false) {
-			list_head_insert(head);
+			list_head_insert(head, entry);
 			precursor = NULL;
 			cursor = head;
 		}
 		else {
-			list_insert(precursor);
+			list_insert(precursor, entry);
 			precursor = precursor->link();
 			cursor = cursor->link();
 		}
@@ -60,17 +60,17 @@ namespace assignment_sequence2 {
 	void sequence::attach(const value_type& entry) {
 		if (many_nodes == 0) {
 			precursor = head;
-			list_head_insert(head);
+			list_head_insert(head, entry);
 			cursor = head;
 		} 
 		else if (is_item() == false) {
 			precursor = tail;
-			list_insert(tail);
+			list_insert(tail, entry);
 			cursor = tail;
 		} 
 		else {
 			precursor = precursor->link();
-			list_insert(cursor);
+			list_insert(cursor, entry);
 			cursor = cursor->link();
 		}
 		++many_nodes;

@@ -88,7 +88,7 @@ namespace assignment_sequence2 {
         // CONSTANT MEMBER FUNCTIONS
         size_t size() const {return many_nodes;}
         bool is_item() const {return cursor != NULL;}
-        value_type current() const {return currsor->data();}
+        value_type current() const {return cursor->data();}
     private:
         node *head;
         node *tail;
