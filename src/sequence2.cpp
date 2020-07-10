@@ -25,6 +25,9 @@ namespace assignment_sequence2 {
 
 	sequence::~sequence() {
 		list_clear(head);
+		precursor = NULL;
+		cursor = NULL;
+		many_nodes = 0;
 	}
 
 	// MODIFICARION MEMBER FUNCTIONS
@@ -39,16 +42,20 @@ namespace assignment_sequence2 {
 	}
 
 	void sequence::insert(const value_type& entry) {
-		if (many_nodes == 0 || cursor == head) {
-			precursor = head;
+		/* If empty, set the tail */
+		if (many_nodes == 0) {
+			precursor = NULL;
 			list_head_insert(head, entry);
 			cursor = head;
+			tail = head; /* Set tail */
 		} 
-		else if (is_item() == false) {
+		/* If no item or cursor points to the first item, insert at head */
+		else if (is_item() == false || cursor == head) {
 			list_head_insert(head, entry);
 			precursor = NULL;
 			cursor = head;
 		}
+		/* Inserts at the middle of the list */
 		else {
 			list_insert(precursor, entry);
 			precursor = precursor->link();
@@ -58,18 +65,23 @@ namespace assignment_sequence2 {
 	}
 
 	void sequence::attach(const value_type& entry) {
+		/* If empty, set tail */
 		if (many_nodes == 0) {
 			precursor = head;
 			list_head_insert(head, entry);
 			cursor = head;
+			tail = head; /* Set tail */
 		} 
-		else if (is_item() == false) {
+		/* If no item or cursor points to the last item, insert at tail */
+		else if (is_item() == false || cursor == tail) {
 			precursor = tail;
 			list_insert(tail, entry);
+			tail = tail->link(); /* Update tail */
 			cursor = tail;
 		} 
+		/* Attaches at the middle of the list */
 		else {
-			precursor = precursor->link();
+			precursor = cursor;
 			list_insert(cursor, entry);
 			cursor = cursor->link();
 		}
@@ -78,21 +90,26 @@ namespace assignment_sequence2 {
 
 	void sequence::remove_current() {
 		assert(is_item());
+		/* If just one node, remove at head */
 		if (many_nodes == 1) {
 			list_head_remove(head);
 			precursor = NULL;
 			cursor = NULL;
+			tail = NULL;
 		}
+		/* If first item, remove at head, set cursor to head */
 		else if (cursor == head) {
 			precursor = NULL;
 			list_head_remove(head);
 			cursor = head;
 		} 
+		/* If last item, remove at tail, set cursor as NULL, update tail */
 		else if (cursor == tail) {
-			tail = precursor;
+			tail = precursor; /* Update tail */
 			list_remove(tail);
 			cursor = NULL;
 		}
+		/* Remove at middle */
 		else {
 			list_remove(cursor);
 			cursor = cursor->link();
