@@ -43,6 +43,7 @@ namespace assignment_sequence2 {
 	}
 
 	void sequence::advance() {
+		assert(is_item());
 		precursor = cursor;
 		cursor = cursor->link();
 	}
@@ -64,8 +65,7 @@ namespace assignment_sequence2 {
 		/* Inserts at the middle of the list */
 		else {
 			list_insert(precursor, entry);
-			precursor = precursor->link();
-			cursor = cursor->link();
+			cursor = precursor->link();
 		}
 		++many_nodes;
 	}
@@ -117,8 +117,8 @@ namespace assignment_sequence2 {
 		}
 		/* Remove at middle */
 		else {
-			list_remove(cursor);
 			cursor = cursor->link();
+			list_remove(cursor);
 		}
 		--many_nodes;
 	}
