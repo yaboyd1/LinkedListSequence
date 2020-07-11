@@ -19,8 +19,14 @@ namespace assignment_sequence2 {
 	sequence::sequence(const sequence& source) {
 		list_copy(source.head, head, tail);
 		many_nodes = source.many_nodes;
-		cursor = source.cursor;
-		precursor = source.precursor;
+		/* Copy cursor locations */
+		precursor = NULL;
+        cursor = head;
+        node *traverse = source.head;
+        while(traverse != NULL && traverse != source.cursor) {
+            traverse = traverse->link();
+            advance();
+        }
 	}
 
 	sequence::~sequence() {
@@ -32,7 +38,7 @@ namespace assignment_sequence2 {
 
 	// MODIFICARION MEMBER FUNCTIONS
 	void sequence::start() {
-		precursor = NULL;
+		precursor = head;
 		cursor = head;
 	}
 
@@ -118,9 +124,17 @@ namespace assignment_sequence2 {
 	}
 	
 	void sequence::operator =(const sequence& source) {
+		if (this == &source) return;
+		list_clear(head);
 		list_copy(source.head, head, tail);
 		many_nodes = source.many_nodes;
-		cursor = source.cursor;
-		precursor = source.cursor;
+		/* Copy cursor locations */
+		precursor = NULL;
+        cursor = head;
+        node *traverse = source.head;
+        while(traverse != NULL && traverse != source.cursor) {
+            traverse = traverse->link();
+            advance();
+        }
 	}
 }
