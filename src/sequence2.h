@@ -75,26 +75,26 @@ namespace assignment_sequence2 {
         typedef size_t size_type;
         typedef node::value_type value_type;
         // CONSTRUCTORS and DESTRUCTOR
-        sequence();
-        sequence(const sequence& source);
-        ~sequence();
+        sequence(); 
+        sequence(const sequence& source); /* O(n): Copies by value */
+        ~sequence(); /* O(n): Deletes each item individually */
         // MODIFICATION MEMBER FUNCTIONS
-        void start();
-        void advance();
-        void insert(const value_type& entry);
-        void attach(const value_type& entry);
-        void remove_current();
-        void operator =(const sequence& source);
+        void start(); /* O(1): Puts cursor at the start of the sequence */
+        void advance(); /* O(1): Advance cursor by one item */
+        void insert(const value_type& entry); /* O(1): Places at item before the cursor */
+        void attach(const value_type& entry); /* O(1): Places at item after the cursor */
+        void remove_current(); /* O(1): Removes the current item */
+        void operator =(const sequence& source); /* O(n): Copies by value */
         // CONSTANT MEMBER FUNCTIONS
-        size_t size() const {return many_nodes;}
+        size_type size() const {return many_nodes;}
         bool is_item() const {return cursor != NULL;}
         value_type current() const {return cursor->data();}
     private:
-        node *head;
-        node *tail;
-        node *cursor;
-        node *precursor;
-        size_type many_nodes;
+        node *head;            /* First item of the sequence */
+        node *tail;            /* Last item of the sequence */
+        node *cursor;          /* Current item of the sequence */
+        node *precursor;       /* Item prior the current item */
+        size_type many_nodes;  /* Total number of nodes */
     };
 }
 

@@ -9,10 +9,7 @@ using namespace assignment_sequence2;
 namespace assignment_sequence2 {
 	// CONSTRUCTORS and DESTRUCTOR
 	sequence::sequence() {
-		head = NULL;
-		tail = NULL;
-		cursor = NULL;
-		precursor = NULL;
+		head = tail = cursor = precursor = NULL;
 		many_nodes = 0;
 	}
 
@@ -116,6 +113,7 @@ namespace assignment_sequence2 {
 	}
 	
 	void sequence::operator =(const sequence& source) {
+		/* Check for self-assignment, clear values before copying */
 		if (this == &source) return;
 		list_clear(head);
 		list_copy(source.head, head, tail);
