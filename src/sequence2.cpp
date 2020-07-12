@@ -20,25 +20,19 @@ namespace assignment_sequence2 {
 		list_copy(source.head, head, tail);
 		many_nodes = source.many_nodes;
 		/* Copy cursor locations */
-		precursor = NULL;
-        cursor = head;
-        node *traverse = source.head;
-        while(traverse != NULL && traverse != source.cursor) {
-            traverse = traverse->link();
-            advance();
-        }
+		start();
+		for (node* i = source.head; i != NULL && i != source.cursor; i = i->link()) advance();
 	}
 
 	sequence::~sequence() {
 		list_clear(head);
-		precursor = NULL;
-		cursor = NULL;
+		precursor = cursor = NULL;
 		many_nodes = 0;
 	}
 
 	// MODIFICARION MEMBER FUNCTIONS
 	void sequence::start() {
-		precursor = head;
+		precursor = NULL;
 		cursor = head;
 	}
 
@@ -99,9 +93,7 @@ namespace assignment_sequence2 {
 		/* If just one node, remove at head */
 		if (many_nodes == 1) {
 			list_head_remove(head);
-			precursor = NULL;
-			cursor = NULL;
-			tail = NULL;
+			precursor = cursor = tail = NULL;
 		}
 		/* If first item, remove at head, set cursor to head */
 		else if (cursor == head) {
@@ -118,7 +110,7 @@ namespace assignment_sequence2 {
 		/* Remove at middle */
 		else {
 			cursor = cursor->link();
-			list_remove(cursor);
+			list_remove(precursor);
 		}
 		--many_nodes;
 	}
@@ -129,12 +121,7 @@ namespace assignment_sequence2 {
 		list_copy(source.head, head, tail);
 		many_nodes = source.many_nodes;
 		/* Copy cursor locations */
-		precursor = NULL;
-        cursor = head;
-        node *traverse = source.head;
-        while(traverse != NULL && traverse != source.cursor) {
-            traverse = traverse->link();
-            advance();
-        }
+		start();
+		for (node* i = source.head; i != NULL && i != source.cursor; i = i->link()) advance();
 	}
 }
